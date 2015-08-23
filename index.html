@@ -41,15 +41,30 @@
     
 
     <!-- SLIDES -->
-    <slide class="" id="slide-1" style="background:;">
+    <slide class="class" id="id" style="background:;">
   <hgroup>
-    <h2>Read-And-Delete</h2>
+    <h2>What It&#39;s All About</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The HeightEstimator app was built to meet course requirements for the Data Products course in the Data Science specialization on <a href="http://coursera.org">Coursera</a>.</p>
+
+<p>It demonstrates the basic components of an R-based web application, including taking input from the user and generating output of different kinds.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Why Should I Use It?</h2>
   </hgroup>
   <article data-timings="">
     <ol>
-<li>Edit YAML front matter</li>
-<li>Write using R Markdown</li>
-<li>Use an empty line followed by three dashes to separate slides!</li>
+<li><p>It can be interesting to see how adjusting height of different parents, birth 
+order and gender can change the predicted outcome.</p></li>
+<li><p>It can also be interesting to see where you fall in the confidence interval (or outside
+of it)  for the prediction.</p></li>
+<li><p>Why not?  I like to play around with little applications...</p></li>
 </ol>
 
   </article>
@@ -58,10 +73,40 @@
 
 <slide class="class" id="id" style="background:;">
   <hgroup>
-    <h2>Slide 2</h2>
+    <h2>How It Was Done</h2>
   </hgroup>
   <article data-timings="">
-    
+    <p>The Height Estimator app was built by running a linear regression against the GaltonFamily Data in the HistData library that comes with R.  The fits were saved, and are used by the estimator without having to re-run the training.</p>
+
+<pre><code class="r">library(HistData)
+
+data(GaltonFamilies)
+# Remove some unneeded columns.  family, children and midparentheight turned out
+# to have low predictive importance.
+GaltonFamiliesTrimmed &lt;- GaltonFamilies[,-c(1,4,5)]
+fitGalton &lt;- lm(childHeight ~ ., data=GaltonFamiliesTrimmed)
+saveRDS(fitGalton, &quot;galtonFit.rds&quot;)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Historical Comparisons</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The data in the Galton data set is historical, but over the last hundred years average heights haven&#39;t changed that much.  The average heights in the GaltonFamilies data set for fathers is 69.3 inches, while the average height for males in the United States today is 69.5 inches.  </p>
+
+<p>For mothers in the GaltonFamilies data set we get 64 inches, and the current average height for adult women in the United States is 64 inches.</p>
+
+<p>The current averages come from</p>
+
+<p>US Dept. of Health and Human Services et al. (October 2012). &quot;Anthropometric 
+   Reference Data for Children and Adults: United States, 2007–2010&quot; <a href="http://www.cdc.gov/nchs/data/series/sr_11/sr11_252.pdf">PDF</a>. 
+   National Health Statistics Reports 11.</p>
+
   </article>
   <!-- Presenter Notes -->
 </slide>
@@ -72,14 +117,26 @@
     <ul>
       <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=1 title='Read-And-Delete'>
+        data-slide=1 title='What It&#39;s All About'>
          1
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=2 title='Slide 2'>
+        data-slide=2 title='Why Should I Use It?'>
          2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='How It Was Done'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Historical Comparisons'>
+         4
       </a>
     </li>
   </ul>

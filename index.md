@@ -9,18 +9,58 @@ hitheme     : tomorrow      #
 widgets     : []            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft}
 knit        : slidify::knit2slides
----
-
-## Read-And-Delete
-
-1. Edit YAML front matter
-2. Write using R Markdown
-3. Use an empty line followed by three dashes to separate slides!
 
 --- .class #id 
 
-## Slide 2
 
 
+## What It's All About
+
+The HeightEstimator app was built to meet course requirements for the Data Products course in the Data Science specialization on [Coursera](http://coursera.org).
+
+It demonstrates the basic components of an R-based web application, including taking input from the user and generating output of different kinds.
 
 
+---  .class #id 
+
+## Why Should I Use It?
+
+1. It can be interesting to see how adjusting height of different parents, birth 
+order and gender can change the predicted outcome.
+
+2. It can also be interesting to see where you fall in the confidence interval (or outside
+of it)  for the prediction.
+
+3. Why not?  I like to play around with little applications...
+
+---  .class #id 
+
+## How It Was Done
+
+The Height Estimator app was built by running a linear regression against the GaltonFamily Data in the HistData library that comes with R.  The fits were saved, and are used by the estimator without having to re-run the training.
+
+
+```r
+library(HistData)
+
+data(GaltonFamilies)
+# Remove some unneeded columns.  family, children and midparentheight turned out
+# to have low predictive importance.
+GaltonFamiliesTrimmed <- GaltonFamilies[,-c(1,4,5)]
+fitGalton <- lm(childHeight ~ ., data=GaltonFamiliesTrimmed)
+saveRDS(fitGalton, "galtonFit.rds")
+```
+
+---  .class #id 
+
+## Historical Comparisons
+
+The data in the Galton data set is historical, but over the last hundred years average heights haven't changed that much.  The average heights in the GaltonFamilies data set for fathers is 69.3 inches, while the average height for males in the United States today is 69.5 inches.  
+
+For mothers in the GaltonFamilies data set we get 64 inches, and the current average height for adult women in the United States is 64 inches.
+
+The current averages come from
+
+   US Dept. of Health and Human Services et al. (October 2012). "Anthropometric 
+   Reference Data for Children and Adults: United States, 2007–2010" [PDF](http://www.cdc.gov/nchs/data/series/sr_11/sr11_252.pdf). 
+   National Health Statistics Reports 11.
