@@ -35,7 +35,8 @@ shinyUI(pageWithSidebar(
                   h4('Lower'),
                   textOutput('confidenceLower'),
                   h4('Upper'),
-                  textOutput('confidenceUpper'))),
+                  textOutput('confidenceUpper'),
+                  plotOutput('histogram'))),
         
         tabPanel(h3("Directions"),
                  p("Enter your data into the side panel controls, and then click 'Estimate Me!'.  

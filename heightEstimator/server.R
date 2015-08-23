@@ -1,9 +1,12 @@
 library(shiny)
+library(HistData)
+data(GaltonFamilies)
 
 fitGalton <- readRDS("galtonFit.rds")
 
 lowerConf <<- 0
 upperConf <<- 0
+fit <<- 0
 
 predictHeight <- function(input) {
   newData = data.frame("mother" = input$mother,
@@ -13,6 +16,7 @@ predictHeight <- function(input) {
   pred <- predict(fitGalton, newData, interval='confidence')
   lowerConf <<- pred[2]
   upperConf <<- pred[3]
+  fit <<- pred[1]
   round(pred[1],1)
 }
 
@@ -42,6 +46,14 @@ shinyServer(function(input,output){
       ""
     }
   })
-
+  
+  output$histogram <- renderPlot({
+    if(input$goButton > 0) {
+      hist(GaltonFamilies$childHeight, xlab="Children's Height", ylab="Frequency",
+           main="Histogram of Children's Height from GaltonFamilies")
+      abline(v = round(fit,2), col="red")
+    } 
+  })
+  
 })
 
